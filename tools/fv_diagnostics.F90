@@ -5023,7 +5023,7 @@ subroutine rh_calc (pfull, t, qv, rh, do_cmip)
    real, parameter :: d378 = 1.-d622
 
    logical :: do_simple = .false.
-
+   integer :: k
 ! because Betts-Miller uses a simplified scheme for calculating the relative humidity
 
      if (do_simple) then
@@ -5036,6 +5036,11 @@ subroutine rh_calc (pfull, t, qv, rh, do_cmip)
          call compute_qs (t, pfull, rh, q=qv, es_over_liq_and_ice = .true.)
          rh(:,:)=100.*qv(:,:)/rh(:,:)
         else
+	 do k=1, size(t,2) 
+	 if (maxval(t(:,k)) > 373.) then 
+	 print *, 'ATM-VAY-TRH2 TOOLS_FVD_RH_CALC ', k, maxval(t(:,k))	
+	 endif
+	 enddo
         call compute_qs (t, pfull, rh, q=qv)
         rh(:,:)=100.*qv(:,:)/rh(:,:)
      endif
