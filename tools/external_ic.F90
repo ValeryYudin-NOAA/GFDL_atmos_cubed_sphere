@@ -738,7 +738,8 @@ contains
 !***  Remap the variables in the compute domain.
 !
         call remap_scalar(Atm, levp, npz, ntracers, ak, bk, ps, q, zh, omga, temp)
-
+!        print *, ' VAY-NOTE-NGGPS-IC Temp ', maxval(Atm%pt(is:ie,js:je,1:npz)), minval(Atm%pt(is:ie,js:je,1:npz))
+!        print *, ' VAY-NOTE-NGGPS-IC ZH ', maxval(Zh)*1.e-3, minval(Zh)*1.e-3	
         allocate ( ud(is:ie,  js:je+1, 1:levp) )
         allocate ( vd(is:ie+1,js:je,   1:levp) )
 
